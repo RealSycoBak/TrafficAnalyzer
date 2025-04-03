@@ -37,16 +37,14 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-# Electric vehicle classification function (simplified example)
+# Electric vehicle classification function (This is a placeholder classifiier until I find a trained model to do it)
 def is_electric_vehicle(vehicle_img, model_output=None):
     """
     Determine if a vehicle is electric based on visual characteristics
     This is a simplified approach - in a real application, you would use a trained
     classifier specifically for distinguishing electric vs non-electric vehicles
     """
-    # For this example, we'll use a heuristic based on vehicle color and shape
-    # This is just a placeholder - a real implementation would use a trained model
-    
+    # Feuristic based on vehicle color and shape
     # Convert to HSV for better color analysis
     if vehicle_img is not None and vehicle_img.size > 0:
         try:
@@ -65,12 +63,8 @@ def is_electric_vehicle(vehicle_img, model_output=None):
             # Check for white/silver (common in Teslas and other EVs)
             is_white_silver = avg_saturation < 30
             
-            # If using a classifier model, we could use specific classes
-            # For example, certain ImageNet classes might correlate with EV shapes
             if model_output is not None:
-                # This is a very rough approximation - a real system would need
-                # a specialized classifier
-                ev_related_classes = [817, 818, 661, 468]  # Sample ImageNet classes
+                ev_related_classes = [817, 818, 661, 468]
                 _, predicted = torch.max(model_output, 1)
                 pred_class = predicted.item()
                 class_hint = pred_class in ev_related_classes
